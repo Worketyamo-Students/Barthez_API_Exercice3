@@ -22,7 +22,11 @@ export const envs = {
 	JWT_PUBLIC_KEY: get('JWT_PUBLIC_KEY').default("./keys/public.key").asString(),
 	JWT_REFRESH_PRIVATE_KEY: get('JWT_REFRESH_PRIVATE_KEY').default("./keys/refresh-private.key").asString(),
 	JWT_REFRESH_PUBLIC_KEY: get('JWT_REFRESH_PUBLIC_KEY').default("./keys/refresh-public.key").asString(),
-
+	
+	JWT_COOKIE_DURATION: get('JWT_COOKIE_DURATION').default(5000).asInt(),
+	JWT_COOKIE_HTTPS_TATUS: get('JWT_COOKIE_HTTPS_TATUS').default('true').asBool(),
+	JWT_COOKIE_SECURITY: get('JWT_COOKIE_SECURITY').default('true').asBool(),
+	
 	// # configuration of mail sender
 	MAIL_HOST: get('MAIL_HOST').default("gmail").asString(),
 	MAIL_ADDRESS: get('MAIL_ADDRESS').default("address@gmail.com").asString(),
