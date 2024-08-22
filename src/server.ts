@@ -9,6 +9,8 @@ import { ONE_HUNDRED, SIXTY } from './core/constants';
 import helmet from 'helmet'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
+import user from './routes/users-route';
+import table from './routes/tables-route';
 
 
 const app = express();
@@ -40,7 +42,7 @@ app.use(
 			res.status(429).json({msg: "Too much request from this address"})
 		}
 	}),
-	// employee
+	user
 );
 
 app.use(
@@ -52,7 +54,7 @@ app.use(
 			res.status(429).json({msg: "Too much request from this address"})
 		}
 	}),
-	// attendance
+	table
 );
 
 app.use(

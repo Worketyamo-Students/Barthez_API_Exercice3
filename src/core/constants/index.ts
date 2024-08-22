@@ -4,6 +4,9 @@ export const SIXTY = 60 as const;
 export const ONE_HUNDRED = 100 as const;
 export const ONE_THOUSAND = 1000 as const;
 
+export const  TABLE_STATE = ["reserved", "occupied", "free"] as const;
+export const USER_TITLE = ["customer", "admin"] as const;
+
 export enum HttpCode {
     OK = 200,
  CREATED = 201,

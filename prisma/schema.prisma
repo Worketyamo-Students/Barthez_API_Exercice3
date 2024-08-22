@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id  String @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  email    String @unique
+  password String
+  status   title  @default(customer)
+
+  // User can have one or many reservations
+  reservations Reservation[]
+}
+
+model Table {
+  table_id String @id @default(auto()) @map("_id") @db.ObjectId
+  number   Int
+  capacity Int    @default(1)
+  state    state  @default(free)
+
+  // Table can be reserved or not, if it's reserved, we passd ID of reservation who make it not free
+  reservation   Reservation? @relation(fields: [reservationID], references: [reservation_id])
+  reservationID String?      @db.ObjectId
+}
+
+model Reservation {
+  reservation_id  String   @id @default(auto()) @map("_id") @db.ObjectId
+  dateReservation DateTime
+  codeQr          String
+
+  // Enter the ID of user whoo make reservation
+  userID String @db.ObjectId
+  user   User   @relation(fields: [userID], references: [user_id])
+
+  // Reservation can make reference to one or many tables
+  table Table[]
+}
+
+enum state {
+  reserved
+  occupied
+  free
+}
+
+enum title {
+  customer
+  admin
+}
